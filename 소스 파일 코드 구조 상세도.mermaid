@@ -1,0 +1,60 @@
+graph TD
+    subgraph main.js
+        M1["import { createApp } from 'vue'"] --> M2["import App from './App.vue'"]
+        M2 --> M3["import router from './router'"]
+        M3 --> M4["const app = createApp(App)"]
+        M4 --> M5["app.use(router)"]
+        M5 --> M6["app.mount('#app')"]
+    end
+    
+    subgraph index.js[Router: index.js]
+        R1["import { createRouter, createWebHistory }"] --> R2["import Home, AddMemo components"]
+        R2 --> R3["const router = createRouter({...})"]
+        R3 --> R4["routes 정의:
+                  - path: '/' → Home.vue
+                  - path: '/memos/add' → AddMemo.vue"]
+        R4 --> R5["export default router"]
+    end
+    
+    subgraph App.vue
+        A1["template: 헤더, router-view, 푸터"] --> A2["style: 컨테이너 최대 가로 크기 제한"]
+    end
+    
+    subgraph Home.vue
+        H1["script setup:
+            import { reactive } from 'vue'
+            import { StorageService }"] --> H2["storageService 인스턴스 생성"]
+        H2 --> H3["reactive state 초기화"]
+        H3 --> H4["onCreated IIAFE 함수"]
+        H4 --> H5["template: 메모 목록 반복 출력"]
+        H5 --> H6["router-link: 메모 상세 및 추가 링크"]
+        H6 --> H7["style: 메모 리스트 스타일링"]
+    end
+    
+    subgraph AddMemo.vue
+        AD1["template: 메모 추가 폼 (미구현)"]
+    end
+    
+    subgraph StorageService.js
+        S1["class StorageService"] --> S2["private #storageName"]
+        S2 --> S3["constructor: 스토리지 이름, 예시 데이터 초기화"]
+        S3 --> S4["private #getStorageData(): localStorage에서 데이터 조회"]
+        S3 --> S5["private #saveStorageData(obj): localStorage에 데이터 저장"]
+        S3 --> S6["public 메서드:
+                 - addItem(item): 신규 항목 삽입
+                 - getItems(): 전체 항목 조회
+                 - getItem(id): 특정 항목 조회
+                 - setItem(item): 특정 항목 수정
+                 - delItem(id): 특정 항목 삭제"]
+    end
+    
+    M6 ==> A1
+    R5 ==> A1
+    H7 ==> S1
+    
+    style main.js fill:#f9d5e5,stroke:#333,stroke-width:2px
+    style index.js fill:#d5f9e5,stroke:#333,stroke-width:2px
+    style App.vue fill:#e5d5f9,stroke:#333,stroke-width:2px
+    style Home.vue fill:#f9e5d5,stroke:#333,stroke-width:2px
+    style AddMemo.vue fill:#e5f9d5,stroke:#333,stroke-width:2px
+    style StorageService.js fill:#d5e5f9,stroke:#333,stroke-width:2px
