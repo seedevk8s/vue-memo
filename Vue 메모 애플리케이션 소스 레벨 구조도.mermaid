@@ -1,0 +1,28 @@
+flowchart TD
+    subgraph "Vue 메모 애플리케이션 소스 레벨 구조도"
+        Main["main.js
+        (애플리케이션 진입점)"]
+        App["App.vue
+        (기본 레이아웃)"]
+        Router["index.js
+        (라우터 설정)"]
+        Home["Home.vue
+        (메모 목록 컴포넌트)"]
+        AddMemo["AddMemo.vue
+        (메모 추가 컴포넌트)"]
+        Storage["StorageService.js
+        (로컬 스토리지 관리)"]
+        
+        Main --> App
+        Main --> Router
+        Router --> Home
+        Router --> AddMemo
+        Home --> Storage
+        
+        style Main fill:#f9d5e5,stroke:#333,stroke-width:2px
+        style App fill:#d5f9e5,stroke:#333,stroke-width:2px
+        style Router fill:#e5d5f9,stroke:#333,stroke-width:2px
+        style Home fill:#f9e5d5,stroke:#333,stroke-width:2px
+        style AddMemo fill:#e5f9d5,stroke:#333,stroke-width:2px
+        style Storage fill:#d5e5f9,stroke:#333,stroke-width:2px
+    end
