@@ -38,7 +38,7 @@ export class StorageService {
     // 스토리지 데이터 저장
     #saveStorageData(obj) {
         const json = JSON.stringify(obj);   // JSON 문자열로 변환
-        localStorage.setItem(this.#storageName, JSON.stringify(json));
+        localStorage.setItem(this.#storageName, json);      //그대로 저장 (한 번만 stringify)
     }
 
 
@@ -54,12 +54,12 @@ export class StorageService {
     }
 
     // 전체 항목 조회
-    getItem() {
+    getItems() {
         return this.#getStorageData().items;
     }
 
     // 특정 항목 조회
-    getItems(id) {
+    getItem(id) {
         return this.#getStorageData().items.find(i => i.id === id);
     }
 
