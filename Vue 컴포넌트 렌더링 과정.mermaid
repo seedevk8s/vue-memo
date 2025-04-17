@@ -1,0 +1,33 @@
+flowchart TB
+    subgraph App.vue
+        AP1[Header: Memo Application] --> AP2[router-view]
+        AP2 --> AP3[Footer: © 2025. Memo Application]
+    end
+    
+    AP2 --> |"path=/"| HP[Home.vue]
+    AP2 --> |"path=/memos/add"| AM[AddMemo.vue]
+    
+    subgraph Home.vue
+        HP --> |1.초기화| HP1["StorageService 인스턴스 생성"]
+        HP1 --> |2.데이터로드| HP2["state.memos = storageService.getItems()"]
+        HP2 --> |3.렌더링| HP3["메모 목록 렌더링 (v-for)"]
+        
+        HP3 --> |제목| HP4["강의 준비물"]
+        HP3 --> |제목| HP5["스터디 과제"]
+        HP3 --> |제목| HP6["마트에서 살 물건"]
+        
+        HP4 --> |내용| HP7["노트북, 랩 파일"]
+        HP5 --> |내용| HP8["앱 배포, AWS 계정 생성"]
+        HP6 --> |내용| HP9["감자, 두부, 계란"]
+        
+        HP3 --> HP10["+ 추가하기 버튼"]
+    end
+    
+    subgraph AddMemo.vue
+        AM --> AM1["제목: 메모 추가"]
+        AM1 --> AM2["구현 예정 - 메모 추가 폼"]
+    end
+    
+    style App.vue fill:#e5d5f9,stroke:#333,stroke-width:2px
+    style Home.vue fill:#f9e5d5,stroke:#333,stroke-width:2px
+    style AddMemo.vue fill:#d5f9e5,stroke:#333,stroke-width:2px
