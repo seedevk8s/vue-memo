@@ -9,6 +9,13 @@ export class StorageService {
             throw new Error('스토리지 이름을 입력해주세요.');
         }
         this.storageName = storageName;
+
+        // 예시 항목 데이터 설정 (===는 값과 자료형까지 모두 같아야 true를 반환)
+        if (localStorage.getItem(this.#storageName) === null) {  //== null을 썼을 경우, 만약 어떤 이유로 undefined가 반환되도 true가 될 수 있어 예외가 발생할 위험
+            this.addItem({title: "강의 준비물", content: "노트북, 랩 파일"});
+            this.addItem({title: "스터디 과제", content: "앱 배포, AWS 계정 생성"});
+            this.addItem({title: "마트에서 살 물건", content: "감자, 두부, 계란"});
+        }
     }
 
     // 스토리지 데이터 조회
